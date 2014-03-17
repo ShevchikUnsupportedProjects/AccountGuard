@@ -49,6 +49,10 @@ public class DataBase {
 		accounts.remove(nick.toLowerCase());
 	}
 
+	public AccountData getAccount(String nick) {
+		return accounts.get(nick.toLowerCase());
+	}
+
 	public void addForcedHost(String nick, String host) {
 		nick = nick.toLowerCase();
 		if (hasAccount(nick)) {
