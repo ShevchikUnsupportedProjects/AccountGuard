@@ -36,9 +36,47 @@ public class DataBase {
 	}
 
 	private HashMap<String, AccountData> accounts = new HashMap<String, AccountData>();
-	
-	
-	
+
+	public boolean hasAccount(String nick) {
+		return accounts.containsKey(nick.toLowerCase());
+	}
+
+	public void registerAccount(String nick) {
+		accounts.put(nick.toLowerCase(), new AccountData());
+	}
+
+	public void unregisterAccount(String nick) {
+		accounts.remove(nick.toLowerCase());
+	}
+
+	public void addForcedHost(String nick, String host) {
+		nick = nick.toLowerCase();
+		if (hasAccount(nick)) {
+			accounts.get(nick).addForcedHost(host);
+		}
+	}
+
+	public void addAllowedIP(String nick, String IP) {
+		nick = nick.toLowerCase();
+		if (hasAccount(nick)) {
+			accounts.get(nick).addAllowedIP(IP);
+		}
+	}
+
+	public void removeForcedHost(String nick, String host) {
+		nick = nick.toLowerCase();
+		if (hasAccount(nick)) {
+			accounts.get(nick).removeForcedHost(host);
+		}
+	}
+
+	public void removeAllowedIP(String nick, String IP) {
+		nick = nick.toLowerCase();
+		if (hasAccount(nick)) {
+			accounts.get(nick).removeAllowedIP(IP);
+		}
+	}
+
 	public void loadDataBase() {
 		File databasefile = new File(plugin.getDataFolder(), "accounts.db");
 		FileConfiguration config = YamlConfiguration.loadConfiguration(databasefile);
