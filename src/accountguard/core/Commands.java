@@ -17,6 +17,45 @@
 
 package accountguard.core;
 
-public class Commands {
+import org.bukkit.command.Command;
+import org.bukkit.command.CommandExecutor;
+import org.bukkit.command.CommandSender;
+import org.bukkit.entity.Player;
+
+import accountguard.database.DataBase;
+
+public class Commands implements CommandExecutor {
+	
+	private DataBase database;
+	public Commands(DataBase database) {
+		this.database = database;
+	}
+
+	@Override
+	public boolean onCommand(CommandSender sender, Command arg1, String label, String[] args) {
+		if (!(sender instanceof Player)) {
+			sender.sendMessage("A player is expected");
+			return true;
+		}
+		String nick = ((Player) sender).getName();
+		if (args.length == 2 && args[0].equalsIgnoreCase("addhost")) {
+			database.addForcedHost(nick, args[1]);
+			sender.sendMessage("Forced host added");
+			return true;
+		} else if (args.length == 2 && args[0].equalsIgnoreCase("addip")) {
+			database.addAllowedIP(nick, args[1]);
+			sender.sendMessage("Allowed ip added");
+			return true;
+		} else if (args.length == 2 && args[0].equals("removehost")) {
+			database.removeForcedHost(nick, args[1]);
+			sender.sendMessage("Forced host removed");
+			return true;
+		} else if (args.length == 2 && args[0].equalsIgnoreCase("removeip")) {
+			database.removeAllowedIP(nick, args[1]);
+			sender.sendMessage("Allowed ip removed");
+			return true;
+		}
+		return false;
+	}
 
 }
