@@ -19,6 +19,25 @@ package accountguard.core;
 
 import org.bukkit.plugin.java.JavaPlugin;
 
+import accountguard.database.DataBase;
+import accountguard.listeners.LoginListener;
+
 public class AccountGuard extends JavaPlugin {
+
+	private DataBase database;
+
+	@Override
+	public void onEnable() {
+		database = new DataBase(this);
+		database.loadDataBase();
+		getServer().getPluginManager().registerEvents(new LoginListener(database), this);
+		getCommand("accountguard").setExecutor(new Commands(database));
+	}
+
+	@Override
+	public void onDisable() {
+		database.saveDataBase();
+		database = null;
+	}
 
 }
