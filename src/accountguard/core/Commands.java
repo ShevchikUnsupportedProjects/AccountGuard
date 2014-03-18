@@ -38,22 +38,26 @@ public class Commands implements CommandExecutor {
 			return true;
 		}
 		String nick = ((Player) sender).getName();
-		if (args.length == 2 && args[0].equalsIgnoreCase("addhost")) {
-			database.addForcedHost(nick, args[1]);
-			sender.sendMessage("Forced host added");
-			return true;
-		} else if (args.length == 2 && args[0].equalsIgnoreCase("addip")) {
-			database.addAllowedIP(nick, args[1]);
-			sender.sendMessage("Allowed ip added");
-			return true;
-		} else if (args.length == 2 && args[0].equals("removehost")) {
-			database.removeForcedHost(nick, args[1]);
-			sender.sendMessage("Forced host removed");
-			return true;
-		} else if (args.length == 2 && args[0].equalsIgnoreCase("removeip")) {
-			database.removeAllowedIP(nick, args[1]);
-			sender.sendMessage("Allowed ip removed");
-			return true;
+		if (args.length == 3 && args[0].equalsIgnoreCase("host")) {
+			if (args[1].equalsIgnoreCase("add")) {
+				database.addForcedHost(nick, args[2]);
+				sender.sendMessage("Forced host added");
+				return true;
+			} else if (args[1].equalsIgnoreCase("remove")) {
+				database.removeForcedHost(nick, args[2]);
+				sender.sendMessage("Forced host removed");
+				return true;
+			}
+		} else if (args.length == 3 && args[0].equalsIgnoreCase("ip")) {
+			if (args[1].equalsIgnoreCase("add")) {
+				database.addAllowedIP(nick, args[2]);
+				sender.sendMessage("Allowed ip added");
+				return true;
+			} else if (args[1].equalsIgnoreCase("remove")) {
+				database.removeAllowedIP(nick, args[2]);
+				sender.sendMessage("Allowed ip removed");
+				return true;
+			}
 		}
 		return false;
 	}
