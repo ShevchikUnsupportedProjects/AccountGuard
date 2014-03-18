@@ -39,7 +39,6 @@ public class LoginListener implements Listener {
 		String ip = e.getAddress().getHostAddress();
 		String host = e.getHostname().substring(0, e.getHostname().indexOf(":"));
 		if (!database.hasAccount(nick)) {
-			database.registerAccount(nick);
 			return;
 		}
 		AccountData account = database.getAccount(nick);

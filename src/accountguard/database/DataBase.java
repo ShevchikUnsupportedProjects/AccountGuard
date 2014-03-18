@@ -55,30 +55,34 @@ public class DataBase {
 
 	public void addForcedHost(String nick, String host) {
 		nick = nick.toLowerCase();
-		if (hasAccount(nick)) {
-			accounts.get(nick).addForcedHost(host);
+		if (!hasAccount(nick)) {
+			registerAccount(nick);
 		}
+		accounts.get(nick).addForcedHost(host);
 	}
 
 	public void addAllowedIP(String nick, String IP) {
 		nick = nick.toLowerCase();
-		if (hasAccount(nick)) {
-			accounts.get(nick).addAllowedIP(IP);
+		if (!hasAccount(nick)) {
+			registerAccount(nick);
 		}
+		accounts.get(nick).addAllowedIP(IP);
 	}
 
 	public void removeForcedHost(String nick, String host) {
 		nick = nick.toLowerCase();
-		if (hasAccount(nick)) {
-			accounts.get(nick).removeForcedHost(host);
+		if (!hasAccount(nick)) {
+			registerAccount(nick);
 		}
+		accounts.get(nick).removeForcedHost(host);
 	}
 
 	public void removeAllowedIP(String nick, String IP) {
 		nick = nick.toLowerCase();
-		if (hasAccount(nick)) {
-			accounts.get(nick).removeAllowedIP(IP);
+		if (!hasAccount(nick)) {
+			registerAccount(nick);
 		}
+		accounts.get(nick).removeAllowedIP(IP);
 	}
 
 	public void loadDataBase() {
