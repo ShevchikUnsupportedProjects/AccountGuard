@@ -1,0 +1,9 @@
+name: AccountGuard
+main: accountguard.core.AccountGuard
+version: 1.0
+author: _Shevchik_
+load: STARTUP
+commands:
+  accountguard:
+    description: AccountGuard commands
+    aliases: ag
