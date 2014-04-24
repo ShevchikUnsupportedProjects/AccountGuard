@@ -35,7 +35,7 @@ public class LoginListener implements Listener {
 
 	@EventHandler(priority = EventPriority.LOWEST, ignoreCancelled = true)
 	public void onPlayerLogin(PlayerLoginEvent e) {
-		String nick = e.getPlayer().getName();
+		String nick = e.getPlayer().getName().toLowerCase();
 		String ip = e.getAddress().getHostAddress();
 		String host = e.getHostname().substring(0, e.getHostname().indexOf(":"));
 		if (!database.hasAccount(nick)) {
